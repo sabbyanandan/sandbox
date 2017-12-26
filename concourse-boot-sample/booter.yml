@@ -4,45 +4,25 @@ resources:
 - name: concourse-boot-sample
   type: git
   source:
-    uri: https://github.com/rseroter/springboot-azure-concourse.git
+    uri: https://github.com/sabbyanandan/sandbox.git
     branch: master
-#resource for my S3 bucket to store the binary
-- name: resource-s3
-  type: s3
-  source:
-    bucket: spring-demo
-    region_name: us-west-2
-    regexp: springboot-azure-concourse-(.*).jar
-    access_key_id: {{s3-key-id}}
-    secret_access_key: {{s3-access-key}}
-# resource for my Cloud Foundry target
-- name: resource-azure
-  type: cf
-  source:
-    api: {{cf-api}}
-    username: {{cf-username}}
-    password: {{cf-password}}
-    organization: {{cf-org}}
-    space: {{cf-space}}
+    submodules: concourse-boot-sample
     
 jobs:
 - name: build-binary
   plan:
-    - get: resource-seroter-repo
+    - get: concourse-boot-sample
       trigger: true
     - task: build-task
       privileged: true
-      file: resource-seroter-repo/ci/build.yml
-    - put: resource-s3
-      params: 
-        file: resource-app/target/springboot-azure-concourse-0.0.1-SNAPSHOT.jar
+      file: concourse-boot-sample/build.yml
 
-- name: deploy-to-prod
-  plan:
-    - get: resource-s3
-      trigger: true
-      passed: [build-binary]
-    - get: resource-seroter-repo
-    - put: resource-azure
-      params:
-        manifest: resource-seroter-repo/manifest-ci.yml
+# - name: deploy-to-prod
+#   plan:
+#     - get: resource-s3
+#       trigger: true
+#       passed: [build-binary]
+#     - get: resource-seroter-repo
+#     - put: resource-azure
+#       params:
+#         manifest: resource-seroter-repo/manifest-ci.yml
