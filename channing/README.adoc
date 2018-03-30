@@ -1,0 +1,26 @@
+== Build
+```
+mvn clean install
+```
+== Shell
+
+[source,bash,options=nowrap]
+----
+dataflow:>app register --name channing --type sink --uri file:///Users/sanandan/Downloads/channing/target/channing-0.0.1-SNAPSHOT.jar
+Successfully registered application 'sink:channing'
+dataflow:>app info sink:channing
+Information about sink application 'channing':
+Resource URI: file:///Users/sanandan/Downloads/channing/target/channing-0.0.1-SNAPSHOT.jar
+╔══════════════════════════════╤══════════════════════════════╤══════════════════════════════╤══════════════════════════════╗
+║         Option Name          │         Description          │           Default            │             Type             ║
+╠══════════════════════════════╪══════════════════════════════╪══════════════════════════════╪══════════════════════════════╣
+║birthdate                     │The date of birth.            │<none>                        │java.lang.String              ║
+║middle-name                   │The person's middle name.     │<none>                        │java.lang.String              ║
+║first-name                    │The first name of the person. │<none>                        │java.lang.String              ║
+║last-name                     │The last name of the person.  │<none>                        │java.lang.String              ║
+╚══════════════════════════════╧══════════════════════════════╧══════════════════════════════╧══════════════════════════════╝
+----
+
+== Dashboard
+
+image::https://github.com/sabbyanandan/sandbox/raw/master/channing/dashboard.png[Dashboard Results]
