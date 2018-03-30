@@ -2,7 +2,7 @@ package com.example.channing;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties
+@ConfigurationProperties("bazzzzzz")
 public class ChanningAppPropertiesOne {
 
     /**
